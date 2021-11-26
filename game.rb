@@ -1,50 +1,27 @@
-# require neccesary files
+require_relative "pokedex/pokemons"
+require_relative "pokedex/moves"
+require_relative "player"
+require_relative "get_input"
 
-class Game
-  def start
-    # Create a welcome method(s) to get the name, pokemon and pokemon_name from the user
+# rubocop:disable Style/MixinUsage
+include GetInput
+# rubocop:enable Style/MixinUsage
 
-    # Then create a Player with that information and store it in @player
-
-    # Suggested game flow
-    action = menu
-    until action == "Exit"
-      case action
-      when "Train"
-        train
-        action = menu
-      when "Leader"
-        challenge_leader
-        action = menu
-      when "Stats"
-        show_stats
-        action = menu
-      end
-    end
-
-    goodbye
-  end
-
-  def train
-    # Complete this
-  end
-
-  def challenge_leader
-    # Complete this
-  end
-
-  def show_stats
-    # Complete this
-  end
-
-  def goodbye
-    # Complete this
-  end
-
-  def menu
-    # Complete this
-  end
+def select_pokemon
+  pokemons = Pokedex::POKEMONS.select { |name, _data| name }
+  options = pokemons.keys
+  get_with_options("Choose a character:", options.map(&:downcase).first(3))
 end
 
-game = Game.new
-game.start
+name = get_input("What's your name?")
+pokemon = select_pokemon
+pokemon_name = get_input("Give your character a name:")
+
+player = Player.new(name, pokemon, pokemon_name)
+player.select_move
+
+bot = Bot.new
+bot.select_move
+
+# battle = Battle.new(player, bot)
+# battle.start
