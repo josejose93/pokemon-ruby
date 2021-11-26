@@ -1,11 +1,17 @@
 class Battle
   # (complete parameters)
-  def initialize
+  def initialize(player, pokemon)
     # Complete this
+    @player = player
+    @bot = 
   end
 
   def start
     # Prepare the Battle (print messages and prepare pokemons)
+
+    puts "Random Person sent out ONIX!"
+    puts "Great master sent out GREAT CHAR!"
+    puts "-------------------Battle Start!-------------------"
 
     # Until one pokemon faints
     # --Print Battle Status
