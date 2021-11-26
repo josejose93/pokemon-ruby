@@ -31,7 +31,7 @@ class Game
     # Suggested game flow
     action = menu
     until action == "Exit"
-      action = get_input("", true)
+      action = get_input("", obligatory: true)
       case action
       when "Train"
         train
@@ -49,7 +49,7 @@ class Game
 
   # Create a welcome method(s) to get the name, pokemon and pokemon_name from the user
   def input_name
-    name = get_input("First, what is your name?")
+    name = get_input("First, what is your name?", obligatory: true)
     puts "Right! So your name is #{name.upcase}!"
     puts "Your very own POKEMON legend is about to unfold! A world of"
     puts "dreams and adventures with POKEMON awaits! Let's go!"
@@ -66,7 +66,7 @@ class Game
 
   def input_pokemon_name(name_master, name_pokemon)
     puts "You selected #{name_pokemon.upcase}. Great choice!"
-    pokemon_name = get_input("Give your pokemon a name?", false)
+    pokemon_name = get_input("Give your pokemon a name?", obligatory: false)
     pokemon_name.empty? && (pokemon_name = name_pokemon)
     puts "#{name_master.upcase}, raise your young #{pokemon_name.upcase} by making it fight!"
     puts "When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"
@@ -75,13 +75,19 @@ class Game
 
   def train
     # Complete this
-    puts "#{@player.name} challenge Random Person for training"
+    puts "#{@player.name.capitalize} challenge Random Person for training"
     puts "Random Person has a Onix level 4"
-    puts "What do you want to do now?"
+    puts ""
+    opciones = ["fight", "leave"]
+    get_with_options("What do you want to do now?", opciones)
   end
 
   def challenge_leader
     # Complete this
+    puts "Great master challenge the Gym Leader Brock for a fight!"
+    puts "Brock has a Onix level 10"
+    opciones = ["fight", "leave"]
+    get_with_options("What do you want to do now?", opciones)
   end
 
   def show_stats
@@ -90,7 +96,9 @@ class Game
 
   def goodbye
     # Complete this
-    puts "good bye"
+    puts ""
+    puts "Thanks for playing Pokemon Ruby"
+    puts "This game was created with love by: Gaby Ortega, Ximena Calderón, José Pablo Alpaca, Eduardo salinas"
   end
 
   def menu

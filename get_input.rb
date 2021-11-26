@@ -1,6 +1,6 @@
 module GetInput
-  def get_input(prompt, obligatory = true)
-    input = ""    
+  def get_input(prompt, obligatory: true)
+    input = ""
     while input.empty?
       puts prompt
       print "> "
