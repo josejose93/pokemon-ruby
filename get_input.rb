@@ -1,6 +1,6 @@
 module GetInput
   def get_input(prompt, obligatory = true)
-    input = ""
+    input = ""    
     while input.empty?
       puts prompt
       print "> "
@@ -23,7 +23,7 @@ module GetInput
   end
 
   def print_options(options)
-    options.each.with_index do |option, index|        
+    options.each.with_index do |option, index|
       print "#{index + 1}. #{option.capitalize}\t\t"
     end
     print "\n"

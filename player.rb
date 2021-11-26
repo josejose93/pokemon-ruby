@@ -8,7 +8,7 @@ class Player
   # (Complete parameters)
   include GetInput
   attr_reader :pokemon, :name
-  
+
   def initialize(name, species, pokemon_name)
     # Complete this
     @name = name
