@@ -1,10 +1,13 @@
 # require neccesary files
+require_relative "pokedex/pokemons"
 
 class Pokemon
-  # include neccesary modules
+  attr_reader :name, :experience, :moves, :speed
+  attr_accessor :current_move
 
+  # include neccesary modules
   # (complete parameters)
-  def initialize
+  def initialize(species, pokemon_name)
     # Retrieve pokemon info from Pokedex and set instance variables
     # Calculate Individual Values and store them in instance variable
     # Create instance variable with effort values. All set to 0
@@ -12,6 +15,16 @@ class Pokemon
     # If level is 1, set experience points to 0 in instance variable.
     # If level is not 1, calculate the minimum experience point for that level and store it in instance variable.
     # Calculate pokemon stats and store them in instance variable
+    pok_details = Pokedex::POKEMONS[species]
+
+    @name = pokemon_name
+    @species = species
+    @experience = pok_details[:base_exp]
+    @max_health = pok_details[:base_stats][:hp]
+    @speed = pok_details[:base_stats][:speed]
+    @moves = pok_details[:moves]
+    @health = nil
+    @current_move = nil
   end
 
   def prepare_for_battle
