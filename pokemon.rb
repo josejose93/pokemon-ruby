@@ -7,7 +7,7 @@ class Pokemon
 
   # include neccesary modules
   # (complete parameters)
-  def initialize(species, pokemon_name)
+  def initialize(species, pokemon_name, level)
     # Retrieve pokemon info from Pokedex and set instance variables
     # Calculate Individual Values and store them in instance variable
     # Create instance variable with effort values. All set to 0
@@ -25,6 +25,7 @@ class Pokemon
     @moves = pok_details[:moves]
     @health = nil
     @current_move = nil
+    @level = level
   end
 
   def prepare_for_battle

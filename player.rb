@@ -8,11 +8,11 @@ class Player
   # (Complete parameters)
   include GetInput
   attr_reader :pokemon, :name
-  
-  def initialize(name, species, pokemon_name)
+
+  def initialize(name, species, pokemon_name, level)
     # Complete this
     @name = name
-    @pokemon = Pokemon.new(species, pokemon_name)
+    @pokemon = Pokemon.new(species, pokemon_name, level)
   end
 
   def select_move
@@ -23,15 +23,33 @@ class Player
 end
 
 class Bot < Player
+  def select_move
+    print move = @pokemon.moves.sample
+    @pokemon.current_move = Pokedex::MOVES[move]
+  end
+end
+
+class BotMaster < Bot
   def initialize
-    bot_pokemons = Pokedex::POKEMONS.select { |name, _data| name }
-    options = bot_pokemons.keys
-    selected_pokemon = options.sample
-    print super("Random Person", selected_pokemon, selected_pokemon.capitalize)
+    super("Brock", "Onix", "Onix", 10)
   end
 
   def select_move
-    print move = @pokemon.moves.sample
+    move = @pokemon.moves.sample
+    @pokemon.current_move = Pokedex::MOVES[move]
+  end
+end
+
+class BotRandom < Bot
+  def initialize
+    list_pokemons = Pokedex::POKEMONS.keys
+    selected_pokemon = list_pokemons.sample
+    level = rand(1..100)
+    super("Random Person", selected_pokemon, selected_pokemon.capitalize, level)
+  end
+
+  def select_move
+    move = @pokemon.moves.sample
     @pokemon.current_move = Pokedex::MOVES[move]
   end
 end

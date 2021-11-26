@@ -20,8 +20,11 @@ pokemon_name = get_input("Give your character a name:")
 player = Player.new(name, pokemon, pokemon_name)
 player.select_move
 
-bot = Bot.new
-bot.select_move
+# bot = Bot.new
+# bot.select_move
+
+master = Master.new
+master.select_move
 
 # battle = Battle.new(player, bot)
 # battle.start
