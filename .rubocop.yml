@@ -26,3 +26,6 @@ Metrics/ModuleLength:
 
 Style/WordArray:
   EnforcedStyle: brackets
+
+Layout/EndOfLine:
+  Enabled: False
