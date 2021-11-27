@@ -68,9 +68,9 @@ module Pokedex
   # We used this constant to store all the required experience for each level on each growth rate.
   # You can use it or create your own methods to do it
   LEVEL_TABLES = {
-    slow: (1..100).map { |level| ((5 * level**3) / 4.0).floor },
-    medium_slow: (1..100).map { |level| (6 / 5.0 * level**3 - 15 * level**2 + 100 * level - 140).floor },
+    slow: (1..100).map { |level| ((5 * (level**3)) / 4.0).floor },
+    medium_slow: (1..100).map { |level| ((6 / 5.0 * (level**3)) - (15 * (level**2)) + (100 * level) - 140).floor },
     medium_fast: (1..100).map { |level| (level**3).floor },
-    fast: (1..100).map { |level| (4 * level**3 / 5.0).floor }
+    fast: (1..100).map { |level| (4 * (level**3) / 5.0).floor }
   }.freeze
 end
