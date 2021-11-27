@@ -7,7 +7,7 @@ class Pokemon
   # include neccesary modules
   include AuxiliaryMethods
 
-  attr_reader :name, :type, :effort_points, :moves, :current_move, :growth_rate
+  attr_reader :name, :type, :effort_points, :moves, :current_move, :growth_rate, :level, :base_exp
   attr_accessor :experience_points, :stats, :stat_effort, :species
 
   # include neccesary modules
@@ -40,13 +40,13 @@ class Pokemon
 
   def prepare_for_battle
     # Complete this
-    @hp = @stats[:hp]
+    @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
     @current_move = nil
   end
 
   def receive_damage
     # Complete this
-    @hp -= damage
+    @stats[:hp] -= damage
   end
 
   def set_current_move(move)
@@ -56,7 +56,7 @@ class Pokemon
 
   def fainted?
     # Complete this
-    !@hp.positive?
+    !@stats[:hp].positive?
   end
 
   def attack(target)
@@ -92,7 +92,7 @@ class Pokemon
 
   def increase_stats(target)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
-    gained_experience = (target.experience * target.level / 7).floor
+    gained_experience = (target.base_exp * target.level / 7).floor
     @experience_points += gained_experience
 
     # Re-observar si la formula de esta funcion es correcta
@@ -100,7 +100,7 @@ class Pokemon
 
     puts "#{@name} gained #{gained_experience} experience points"
     # If the new experience point are enough to level up, do it and print
-    return unless @experience_points > get_experience(@level + 1)
+    return unless @experience_points > get_experience(@level + 1, @growth_rate)
 
     @level += 1
     # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
@@ -110,8 +110,11 @@ class Pokemon
   # private methods:
 end
 
-xime = Pokemon.new("Proxe", "Charmander", 1)
-p xime.stats
+# xime = Pokemon.new("Proxe", "Bulbasaur", 1)
+# p xime.stats
+# p xime.prepare_for_battle
+# p xime.fainted?
+
 # puts xime.moves
 # move = gets.chomp
 # move = Pokedex::MOVES[move]

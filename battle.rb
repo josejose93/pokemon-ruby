@@ -2,7 +2,7 @@ require_relative "player"
 
 class Battle
   # (complete parameters)
-
+  
   def initialize(player, bot)
     # Complete this
     @player = player
@@ -37,8 +37,8 @@ class Battle
     losser = winner == @player_pokemon ? @bot_pokemon : @player_pokemon
 
     # If the winner is the Player increase pokemon stats
-    (winner == @player_pokemon) && winner.increase_experience(losser)
-    puts "#{winner.name} WINS! They experience reached #{winner.experience}"
+    (winner == @player_pokemon) && winner.increase_stats(losser)
+    puts "#{winner.name} WINS! They experience reached #{winner.experience_points}"
   end
 
   private
@@ -60,6 +60,9 @@ class Battle
   end
 
   def battle_loop
+    @player_pokemon.prepare_for_battle
+    @bot_pokemon.prepare_for_battle
+
     until @player_pokemon.fainted? || @bot_pokemon.fainted?
       @player.select_move
       @bot.select_move
