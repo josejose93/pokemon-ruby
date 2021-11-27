@@ -15,14 +15,14 @@ class Pokemon
     # If level is 1, set experience points to 0 in instance variable.
     # If level is not 1, calculate the minimum experience point for that level and store it in instance variable.
     # Calculate pokemon stats and store them in instance variable
-    pok_details = Pokedex::POKEMONS[species]
+    pokemon_detail = Pokedex::POKEMONS[species]
 
     @name = pokemon_name
     @species = species
-    @experience = pok_details[:base_exp]
-    @max_health = pok_details[:base_stats][:hp]
-    @speed = pok_details[:base_stats][:speed]
-    @moves = pok_details[:moves]
+    @experience = pokemon_detail[:base_exp]
+    @max_health = pokemon_detail[:base_stats][:hp]
+    @speed = pokemon_detail[:base_stats][:speed]
+    @moves = pokemon_detail[:moves]
     @health = nil
     @current_move = nil
   end

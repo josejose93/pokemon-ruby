@@ -17,7 +17,7 @@ class Player
 
   def select_move
     # Complete this
-    move = get_with_options("Select a move to attack", @pokemon.moves)
+    move = get_with_options("#{@name}, select your move:", @pokemon.moves)
     @pokemon.current_move = Pokedex::MOVES[move]
   end
 end
@@ -35,3 +35,6 @@ class Bot < Player
     @pokemon.current_move = Pokedex::MOVES[move]
   end
 end
+
+# jpablo = Player.new("Maestro Jp", "Charmander", "Colita")
+# p jpablo
