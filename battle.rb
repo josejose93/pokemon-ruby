@@ -71,9 +71,9 @@ class Battle
   end
 end
 
-jpablo = Player.new("Maestro Jp", "Charmander", "Colita")
-jpablo1 = Player.new("Maestro Jp", "Charmander", "Colita")
-p jpablo
+# jpablo = Player.new("Maestro Jp", "Charmander", "Colita")
+# jpablo1 = Player.new("Maestro Jp", "Charmander", "Colita")
+# p jpablo
 
-battle_f = Battle.new(jpablo, jpablo1)
-battle_f.start
+# battle_f = Battle.new(jpablo, jpablo1)
+# battle_f.start
