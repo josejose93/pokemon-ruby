@@ -80,13 +80,15 @@ class Game
 
   def train
     # Complete this
+    bot_train = BotRandom.new
+
     puts "#{@player.name.capitalize} challenge Random Person for training"
-    puts "Random Person has a Onix level 4"
+    puts "Random Person has a #{bot_train.pokemon.species} level #{bot_train.pokemon.level}" 
     puts ""
+
     opciones = ["fight", "leave"]
     option = get_with_options("What do you want to do now?", opciones)
     option.downcase == "leave" && (return 0)
-    bot_train = BotRandom.new
     battle = Battle.new(@player, bot_train)
     battle.start
   end

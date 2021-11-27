@@ -17,10 +17,8 @@ class Player
 
   def select_move
     # Complete this
-    p @pokemon.stats
     move = get_with_options("Select a move to attack", @pokemon.moves).downcase
     @pokemon.set_current_move(Pokedex::MOVES[move])
-    p @pokemon.current_move
   end
 end
 
@@ -46,7 +44,7 @@ class BotRandom < Bot
   def initialize
     list_pokemons = Pokedex::POKEMONS.keys
     selected_pokemon = list_pokemons.sample
-    level = 1
+    level = 1 # aumentar para version final
     super("Random Person", selected_pokemon, selected_pokemon.capitalize, level)
   end
 
