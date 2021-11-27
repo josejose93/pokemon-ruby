@@ -26,7 +26,7 @@ class Game
     pokemon = input_pokemon(name)
     pokemon_name = input_pokemon_name(name, pokemon)
     # Then create a Player with that information and store it in @player
-    @player = Player.new(name, pokemon, pokemon_name)
+    @player = Player.new(name, pokemon, pokemon_name, 1)
 
     # Suggested game flow
     action = menu
@@ -90,11 +90,15 @@ class Game
     get_with_options("What do you want to do now?", opciones)
   end
 
+  def show_stats
+    # Complete this
+  end
+
   def goodbye
     # Complete this
     puts ""
     puts "Thanks for playing Pokemon Ruby"
-    puts "This game was created with love by: Gaby Ortega, Ximena Calderón, José Pablo Alpaca, Eduardo salinas"
+    puts "This game was created with love by: Gaby Ortega, Ximena Calderón, José Pablo Alpaca Rivera, Eduardo salinas"
   end
 
   def menu
@@ -105,5 +109,5 @@ class Game
   end
 end
 
-player = Player.new(name, pokemon, pokemon_name)
-player.select_move
+game = Game.new
+game.start
