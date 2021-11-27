@@ -51,13 +51,14 @@ module AuxiliaryMethods
   end
 
   def get_effectiveness_multiplier(move, target)
+    effectiveness_multiplier = 1
     target.type.each do |type|
-      effectiveness = TYPE_MULTIPLIER.find do |hash|
+      effectiveness = Pokedex::TYPE_MULTIPLIER.find do |hash|
         hash[:user] == move[:type] && hash[:target] == type
       end
-      effectiveness_multiplier = 1
       effectiveness_multiplier *= effectiveness[:multiplier]
     end
+    effectiveness_multiplier
   end
 
   def print_effectiveness(multiplier, target)

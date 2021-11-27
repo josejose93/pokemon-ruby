@@ -2,10 +2,15 @@ require_relative "player"
 
 class Battle
   # (complete parameters)
+
   def initialize(player, bot)
     # Complete this
     @player = player
+    puts "----------si entro------------" 
+    p @player
     @bot = bot
+    puts "----------si entro bot"
+    p @bot
     @player_pokemon = @player.pokemon
     @bot_pokemon = @bot.pokemon
   end
@@ -71,8 +76,8 @@ class Battle
   end
 end
 
-# jpablo = Player.new("Maestro Jp", "Charmander", "Colita")
-# jpablo1 = Player.new("Maestro Jp", "Charmander", "Colita")
+# jpablo = Player.new("Maestro Jp", "Charmander", "Colita", 1)
+# jpablo1 = BotRandom.new
 # p jpablo
 
 # battle_f = Battle.new(jpablo, jpablo1)

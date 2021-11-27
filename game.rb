@@ -4,8 +4,12 @@ require_relative "get_input"
 require_relative "player"
 require_relative "battle"
 
+
 class Game
   include GetInput
+
+  attr_reader :player
+
   def initialize
     puts ""
     puts "#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#"
@@ -20,6 +24,7 @@ class Game
     puts "This world is inhabited by creatures called POKEMON! For some"
     puts "people, POKEMON are pets. Others use them for fights. Myself..."
     puts "I study POKEMON as a profession."
+    @player = nil
   end
 
   def start
@@ -83,9 +88,7 @@ class Game
     option = get_with_options("What do you want to do now?", opciones)
     option.downcase == "leave" && (return 0)
     bot_train = BotRandom.new
-    p @player.pokemon
-    p bot_train.pokemon
-    battle = Battle.new(@person, bot_train)
+    battle = Battle.new(@player, bot_train)
     battle.start
   end
 

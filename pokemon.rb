@@ -99,12 +99,12 @@ class Pokemon
 
     puts "#{@name} gained #{gained_experience} experience points"
     # If the new experience point are enough to level up, do it and print
-    if @experience_points > get_experience(@level + 1)
-      @level += 1
-      # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
-      puts "#{@name} reached level #{@level}!" # -- Re-calculate the stat
-      @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
-    end
+    return unless @experience_points > get_experience(@level + 1)
+
+    @level += 1
+    # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
+    puts "#{@name} reached level #{@level}!" # -- Re-calculate the stat
+    @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
   end
   # private methods:
 end
