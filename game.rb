@@ -4,7 +4,6 @@ require_relative "get_input"
 require_relative "player"
 require_relative "battle"
 
-
 class Game
   include GetInput
 
@@ -98,6 +97,9 @@ class Game
     puts "Brock has a Onix level 10"
     opciones = ["fight", "leave"]
     get_with_options("What do you want to do now?", opciones)
+    bot_master = BotMaster.new
+    battle = Battle.new(@player, bot_master)
+    battle.start
   end
 
   def show_stats

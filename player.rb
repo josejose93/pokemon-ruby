@@ -17,15 +17,16 @@ class Player
 
   def select_move
     # Complete this
-    move = get_with_options("Select a move to attack", @pokemon.moves)
-    @pokemon.current_move = Pokedex::MOVES[move]
+    move = get_with_options("Select a move to attack", @pokemon.moves).downcase
+    @pokemon.set_current_move(Pokedex::MOVES[move])
+    p @pokemon.current_move
   end
 end
 
 class Bot < Player
   def select_move
-    print move = @pokemon.moves.sample
-    @pokemon.current_move = Pokedex::MOVES[move]
+    move = @pokemon.moves.sample
+    @pokemon.set_current_move(Pokedex::MOVES[move])
   end
 end
 
@@ -36,7 +37,7 @@ class BotMaster < Bot
 
   def select_move
     move = @pokemon.moves.sample
-    @pokemon.current_move = Pokedex::MOVES[move]
+    @pokemon.set_current_move(Pokedex::MOVES[move])
   end
 end
 
@@ -50,6 +51,6 @@ class BotRandom < Bot
 
   def select_move
     move = @pokemon.moves.sample
-    @pokemon.current_move = Pokedex::MOVES[move]
+    @pokemon.set_current_move(Pokedex::MOVES[move])
   end
 end

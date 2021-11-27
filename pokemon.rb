@@ -35,6 +35,7 @@ class Pokemon
     @experience_points = get_experience(@level, @growth_rate)
     # Calculate pokemon stats and store them in instance variable
     @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
+    @current_move = nil
   end
 
   def prepare_for_battle
@@ -48,9 +49,9 @@ class Pokemon
     @hp -= damage
   end
 
-  def set_current_move
+  def set_current_move(move)
     # Complete this
-    @current_move = Pokedex::MOVES.find { |key, _value| key == move }
+    @current_move = move
   end
 
   def fainted?
@@ -108,3 +109,12 @@ class Pokemon
   end
   # private methods:
 end
+
+xime = Pokemon.new("Proxe", "Charmander", 1)
+p xime.stats
+# puts xime.moves
+# move = gets.chomp
+# move = Pokedex::MOVES[move]
+# p move
+# current_move = xime.set_current_move(move)
+# p current_move

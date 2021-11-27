@@ -6,17 +6,15 @@ class Battle
   def initialize(player, bot)
     # Complete this
     @player = player
-    puts "----------si entro------------" 
-    p @player
     @bot = bot
-    puts "----------si entro bot"
-    p @bot
     @player_pokemon = @player.pokemon
     @bot_pokemon = @bot.pokemon
   end
 
   def start
     # Prepare the Battle (print messages and prepare pokemons)
+    @player.pokemon.prepare_for_battle
+    @bot.pokemon.prepare_for_battle
 
     puts "#{@bot.name} sent out #{@bot.pokemon.name}!"
     puts "#{@player.name} sent out #{@player.pokemon.name}!"
@@ -52,9 +50,9 @@ class Battle
     return player_pokemon if player_move[:priority] > bot_move[:priority]
     return bot_pokemon if player_move[:priority] < bot_move[:priority]
 
-    if player_pokemon.speed > bot_pokemon.speed
+    if player_pokemon.stats[:speed] > bot_pokemon.stats[:speed]
       player_pokemon
-    elsif player_pokemon.speed < bot_pokemon.speed
+    elsif player_pokemon.stats[:speed] < bot_pokemon.stats[:speed]
       bot_pokemon
     else
       [player_pokemon, bot_pokemon].sample
