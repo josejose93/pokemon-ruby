@@ -1,21 +1,21 @@
 require_relative "player"
 
 class Battle
+  attr_reader :gym_winner
+
   # (complete parameters)
-  
+
   def initialize(player, bot)
     # Complete this
     @player = player
     @bot = bot
     @player_pokemon = @player.pokemon
     @bot_pokemon = @bot.pokemon
+    @gym_winner = nil
   end
 
   def start
     # Prepare the Battle (print messages and prepare pokemons)
-    @player.pokemon.prepare_for_battle
-    @bot.pokemon.prepare_for_battle
-
     puts "#{@bot.name} sent out #{@bot.pokemon.name}!"
     puts "#{@player.name} sent out #{@player.pokemon.name}!"
     puts "-------------------Battle Start!-------------------"
@@ -39,6 +39,10 @@ class Battle
     # If the winner is the Player increase pokemon stats
     (winner == @player_pokemon) && winner.increase_stats(losser)
     puts "#{winner.name} WINS! They experience reached #{winner.experience_points}"
+    puts "-------------------Battle Ended!-------------------"
+
+    @gym_winner = winner
+    @player.pokemon.prepare_for_battle
   end
 
   private
@@ -60,8 +64,8 @@ class Battle
   end
 
   def battle_loop
-    @player_pokemon.prepare_for_battle
-    @bot_pokemon.prepare_for_battle
+    # @player_pokemon.prepare_for_battle
+    # @bot_pokemon.prepare_for_battle
 
     until @player_pokemon.fainted? || @bot_pokemon.fainted?
       @player.select_move
@@ -76,10 +80,3 @@ class Battle
     end
   end
 end
-
-# jpablo = Player.new("Maestro Jp", "Charmander", "Colita", 1)
-# jpablo1 = BotRandom.new
-# p jpablo
-
-# battle_f = Battle.new(jpablo, jpablo1)
-# battle_f.start

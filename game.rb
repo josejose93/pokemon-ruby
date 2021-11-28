@@ -31,7 +31,7 @@ class Game
     pokemon = input_pokemon(name)
     pokemon_name = input_pokemon_name(name, pokemon)
     # Then create a Player with that information and store it in @player
-    @player = Player.new(name, pokemon, pokemon_name, 1)
+    @player = Player.new(name, pokemon, pokemon_name, 10)
 
     # Suggested game flow
     action = menu
@@ -83,7 +83,7 @@ class Game
     bot_train = BotRandom.new
 
     puts "#{@player.name.capitalize} challenge Random Person for training"
-    puts "Random Person has a #{bot_train.pokemon.species} level #{bot_train.pokemon.level}" 
+    puts "Random Person has a #{bot_train.pokemon.species} level #{bot_train.pokemon.level}"
     puts ""
 
     opciones = ["fight", "leave"]
@@ -95,17 +95,34 @@ class Game
 
   def challenge_leader
     # Complete this
-    puts "Great master challenge the Gym Leader Brock for a fight!"
+    puts "#{@player.name} challenge the Gym Leader Brock for a fight!"
     puts "Brock has a Onix level 10"
     opciones = ["fight", "leave"]
-    get_with_options("What do you want to do now?", opciones)
+    option = get_with_options("What do you want to do now?", opciones)
+    option.downcase == "leave" && (return 0)
     bot_master = BotMaster.new
     battle = Battle.new(@player, bot_master)
     battle.start
+    return unless battle.gym_winner == @player.pokemon # OJITO ACA
+
+    puts "Congratulation! You have won the game!"
+    puts "You can continue training your Pokemon if you want"
   end
 
   def show_stats
-    # Complete this
+    puts ""
+    puts "#{@player.pokemon.name.capitalize}:"
+    puts "Kind: #{@player.pokemon.species}"
+    puts "Level: #{@player.pokemon.level}"
+    puts "Type: #{@player.pokemon.type.join(', ')}"
+    puts "Stats:"
+    puts "HP: #{@player.pokemon.stats[:hp]}"
+    puts "Attack: #{@player.pokemon.stats[:attack]}"
+    puts "Defense: #{@player.pokemon.stats[:defense]}"
+    puts "Special Attack: #{@player.pokemon.stats[:special_attack]}"
+    puts "Special Defense: #{@player.pokemon.stats[:special_defense]}"
+    puts "Speed: #{@player.pokemon.stats[:speed]}"
+    puts "Experience Points: #{@player.pokemon.experience_points}"
   end
 
   def goodbye

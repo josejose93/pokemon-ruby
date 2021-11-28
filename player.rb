@@ -44,7 +44,7 @@ class BotRandom < Bot
   def initialize
     list_pokemons = Pokedex::POKEMONS.keys
     selected_pokemon = list_pokemons.sample
-    level = 1 # aumentar para version final
+    level = rand(1..10)
     super("Random Person", selected_pokemon, selected_pokemon.capitalize, level)
   end
 

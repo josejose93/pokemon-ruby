@@ -83,7 +83,7 @@ class Pokemon
 
       # -- Inflict damage to target and print message "And it hit [target name] with [damage] damage""
       target.stats[:hp] -= damage
-      puts "And it hit #{target.name} with #{damage} damage"
+      puts "And it hit #{target.name} with #{damage.floor} damage"
     # Else, print "But it MISSED!"
     else
       puts "But it MISSED!"
@@ -109,15 +109,3 @@ class Pokemon
   end
   # private methods:
 end
-
-# xime = Pokemon.new("Proxe", "Bulbasaur", 1)
-# p xime.stats
-# p xime.prepare_for_battle
-# p xime.fainted?
-
-# puts xime.moves
-# move = gets.chomp
-# move = Pokedex::MOVES[move]
-# p move
-# current_move = xime.set_current_move(move)
-# p current_move
