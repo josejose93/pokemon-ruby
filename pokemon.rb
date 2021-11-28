@@ -1,58 +1,84 @@
-# require neccesary files
+require_relative "pokedex/pokemons"
+require_relative "pokedex/moves"
+require_relative "auxiliary_methods_pokemon"
 
 class Pokemon
-  # include neccesary modules
+  include AuxiliaryMethods
 
-  # (complete parameters)
-  def initialize
-    # Retrieve pokemon info from Pokedex and set instance variables
-    # Calculate Individual Values and store them in instance variable
-    # Create instance variable with effort values. All set to 0
-    # Store the level in instance variable
-    # If level is 1, set experience points to 0 in instance variable.
-    # If level is not 1, calculate the minimum experience point for that level and store it in instance variable.
-    # Calculate pokemon stats and store them in instance variable
+  attr_reader :name, :type, :effort_points, :moves, :current_move, :growth_rate, :level, :base_exp
+  attr_accessor :experience_points, :stats, :stat_effort, :species
+
+  def initialize(name, species, level = 1)
+    pokemon_details = Pokedex::POKEMONS[species]
+
+    @name = name
+    @species = species
+    @type = pokemon_details[:type]
+    @effort_points = pokemon_details[:effort_points]
+    @base_stat = pokemon_details[:base_stats]
+    @base_exp = pokemon_details[:base_exp]
+    @growth_rate = pokemon_details[:growth_rate]
+    @moves = pokemon_details[:moves]
+
+    @stat_individual_value = calculate_individual_stats
+    @stat_effort = { hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
+    @level = level
+    @experience_points = get_experience(@level, @growth_rate)
+    @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
+    @current_move = nil
   end
 
   def prepare_for_battle
-    # Complete this
+    @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
+    @current_move = nil
   end
 
   def receive_damage
-    # Complete this
+    @stats[:hp] -= damage
   end
 
-  def set_current_move
-    # Complete this
+  def set_current_move(move)
+    @current_move = move
   end
 
   def fainted?
-    # Complete this
+    !@stats[:hp].positive?
   end
 
   def attack(target)
-    # Print attack message 'Tortuguita used MOVE!'
-    # Accuracy check
-    # If the movement is not missed
-    # -- Calculate base damage
-    # -- Critical Hit check
-    # -- If critical, multiply base damage and print message 'It was CRITICAL hit!'
-    # -- Effectiveness check
-    # -- Mutltiply damage by effectiveness multiplier and round down. Print message if neccesary
-    # ---- "It's not very effective..." when effectivenes is less than or equal to 0.5
-    # ---- "It's super effective!" when effectivenes is greater than or equal to 1.5
-    # ---- "It doesn't affect [target name]!" when effectivenes is 0
-    # -- Inflict damage to target and print message "And it hit [target name] with [damage] damage""
-    # Else, print "But it MISSED!"
+    puts "#{@name} used #{@current_move[:name]}"
+
+    hits = @current_move[:accuracy] >= rand(1..100)
+    if hits
+      damage = base_damage(@level, @stats, @current_move, target)
+
+      if critical_hit
+        damage *= 1.5
+        puts "It was CRITICAL hit!"
+      end
+      effectiveness_multiplier = get_effectiveness_multiplier(@current_move, target)
+      damage *= effectiveness_multiplier
+
+      print_effectiveness(effectiveness_multiplier, target)
+
+      target.stats[:hp] -= damage
+      puts "And it hit #{target.name} with #{damage.floor} damage"
+    else
+      puts "But it MISSED!"
+    end
   end
 
   def increase_stats(target)
-    # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
+    gained_experience = (target.base_exp * target.level / 7).floor
+    @experience_points += gained_experience
 
-    # If the new experience point are enough to level up, do it and print
-    # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
+    @stat_effort[target.effort_points[:type]] += target.effort_points[:amount]
+
+    puts "#{@name} gained #{gained_experience} experience points"
+    return unless @experience_points > get_experience(@level + 1, @growth_rate)
+
+    @level += 1
+    puts "#{@name} reached level #{@level}!"
+    @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
   end
-
-  # private methods:
-  # Create here auxiliary methods
 end

@@ -72,7 +72,6 @@ module Pokedex
     }
   }.freeze
 
-  # If the move's type is in this list, the move is special
   SPECIAL_MOVE_TYPE = %i[water grass fire ice electric psychic dragon dark].freeze
 
   TYPE_MULTIPLIER = [
