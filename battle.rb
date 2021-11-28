@@ -3,10 +3,7 @@ require_relative "player"
 class Battle
   attr_reader :gym_winner
 
-  # (complete parameters)
-
   def initialize(player, bot)
-    # Complete this
     @player = player
     @bot = bot
     @player_pokemon = @player.pokemon
@@ -15,28 +12,15 @@ class Battle
   end
 
   def start
-    # Prepare the Battle (print messages and prepare pokemons)
     puts "#{@bot.name} sent out #{@bot.pokemon.name}!"
     puts "#{@player.name} sent out #{@player.pokemon.name}!"
     puts "-------------------Battle Start!-------------------"
 
-    # Until one pokemon faints
-    # --Print Battle Status
-    # --Both players select their moves
     battle_loop
 
-    # --Calculate which go first and which second
-
-    # --First attack second
-    # --If second is fainted, print fainted message
-    # --If second not fainted, second attack first
-    # --If first is fainted, print fainted message
-
-    # Check which player won and print messages
     winner = @player_pokemon.fainted? ? @bot_pokemon : @player_pokemon
     losser = winner == @player_pokemon ? @bot_pokemon : @player_pokemon
 
-    # If the winner is the Player increase pokemon stats
     (winner == @player_pokemon) && winner.increase_stats(losser)
     puts "#{winner.name} WINS! They experience reached #{winner.experience_points}"
     puts "-------------------Battle Ended!-------------------"
@@ -64,9 +48,6 @@ class Battle
   end
 
   def battle_loop
-    # @player_pokemon.prepare_for_battle
-    # @bot_pokemon.prepare_for_battle
-
     until @player_pokemon.fainted? || @bot_pokemon.fainted?
       @player.select_move
       @bot.select_move

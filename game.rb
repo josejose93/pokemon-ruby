@@ -1,4 +1,3 @@
-# require neccesary files
 require_relative "pokedex/pokemons"
 require_relative "get_input"
 require_relative "player"
@@ -30,10 +29,8 @@ class Game
     name = input_name
     pokemon = input_pokemon(name)
     pokemon_name = input_pokemon_name(name, pokemon)
-    # Then create a Player with that information and store it in @player
     @player = Player.new(name, pokemon, pokemon_name, 10)
 
-    # Suggested game flow
     action = menu
     until action == "Exit"
       action = get_input("", obligatory: true)
@@ -52,7 +49,6 @@ class Game
     goodbye
   end
 
-  # Create a welcome method(s) to get the name, pokemon and pokemon_name from the user
   def input_name
     name = get_input("First, what is your name?", obligatory: true)
     puts "Right! So your name is #{name.upcase}!"
@@ -79,7 +75,6 @@ class Game
   end
 
   def train
-    # Complete this
     bot_train = BotRandom.new
 
     puts "#{@player.name.capitalize} challenge Random Person for training"
@@ -94,7 +89,6 @@ class Game
   end
 
   def challenge_leader
-    # Complete this
     puts "#{@player.name} challenge the Gym Leader Brock for a fight!"
     puts "Brock has a Onix level 10"
     opciones = ["fight", "leave"]
@@ -103,7 +97,7 @@ class Game
     bot_master = BotMaster.new
     battle = Battle.new(@player, bot_master)
     battle.start
-    return unless battle.gym_winner == @player.pokemon # OJITO ACA
+    return unless battle.gym_winner == @player.pokemon
 
     puts "Congratulation! You have won the game!"
     puts "You can continue training your Pokemon if you want"
@@ -126,14 +120,12 @@ class Game
   end
 
   def goodbye
-    # Complete this
     puts ""
     puts "Thanks for playing Pokemon Ruby"
     puts "This game was created with love by: Gaby Ortega, Ximena Calderón, José Pablo Alpaca Rivera, Eduardo salinas"
   end
 
   def menu
-    # Complete this
     puts "-----------------------Menu-----------------------"
     puts ""
     puts "1. Stats        2. Train        3. Leader       4. Exit"

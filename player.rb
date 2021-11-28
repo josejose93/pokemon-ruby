@@ -1,22 +1,18 @@
-# require neccesary files
 require_relative "pokedex/pokemons"
 require_relative "pokedex/moves"
 require_relative "pokemon"
 require_relative "get_input"
 
 class Player
-  # (Complete parameters)
   include GetInput
   attr_reader :pokemon, :name
 
   def initialize(name, species, pokemon_name, level)
-    # Complete this
     @name = name
     @pokemon = Pokemon.new(pokemon_name, species, level)
   end
 
   def select_move
-    # Complete this
     move = get_with_options("Select a move to attack", @pokemon.moves).downcase
     @pokemon.set_current_move(Pokedex::MOVES[move])
   end
