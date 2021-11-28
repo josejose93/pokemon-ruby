@@ -8,6 +8,7 @@ class Game
 
   attr_reader :player
 
+  # Initialize game with this prompt
   def initialize
     puts ""
     puts "#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#"
@@ -25,11 +26,12 @@ class Game
     @player = nil
   end
 
+  # Start the game
   def start
     name = input_name
     pokemon = input_pokemon(name)
     pokemon_name = input_pokemon_name(name, pokemon)
-    @player = Player.new(name, pokemon, pokemon_name, 10)
+    @player = Player.new(name, pokemon, pokemon_name, 1)
 
     action = menu
     until action == "Exit"
@@ -49,6 +51,7 @@ class Game
     goodbye
   end
 
+  # Get the name of the player
   def input_name
     name = get_input("First, what is your name?", obligatory: true)
     puts "Right! So your name is #{name.upcase}!"
@@ -57,6 +60,7 @@ class Game
     name
   end
 
+  # Get the player's pokemon
   def input_pokemon(name_master)
     pokemons = Pokedex::POKEMONS.keys
     pokemons = pokemons.map(&:downcase).first(3)
@@ -65,6 +69,7 @@ class Game
     get_with_options("In my old age, I have only 3 left, but you can have one! Choose!\n\n", pokemons)
   end
 
+  # Get the pokemon's name
   def input_pokemon_name(name_master, name_pokemon)
     puts "You selected #{name_pokemon.upcase}. Great choice!"
     pokemon_name = get_input("Give your pokemon a name?", obligatory: false)
@@ -74,6 +79,7 @@ class Game
     pokemon_name
   end
 
+  # Find a battle to practice
   def train
     bot_train = BotRandom.new
 
@@ -88,6 +94,7 @@ class Game
     battle.start
   end
 
+  # Battle with the gym leader
   def challenge_leader
     puts "#{@player.name} challenge the Gym Leader Brock for a fight!"
     puts "Brock has a Onix level 10"
@@ -103,6 +110,7 @@ class Game
     puts "You can continue training your Pokemon if you want"
   end
 
+  # Show stats of the pokemon's player
   def show_stats
     puts ""
     puts "#{@player.pokemon.name.capitalize}:"
@@ -119,12 +127,14 @@ class Game
     puts "Experience Points: #{@player.pokemon.experience_points}"
   end
 
+  # Goodbye message when exit the game
   def goodbye
     puts ""
     puts "Thanks for playing Pokemon Ruby"
     puts "This game was created with love by: Gaby Ortega, Ximena Calderón, José Pablo Alpaca Rivera, Eduardo salinas"
   end
 
+  # Options from the menu
   def menu
     puts "-----------------------Menu-----------------------"
     puts ""

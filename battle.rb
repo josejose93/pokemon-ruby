@@ -12,6 +12,7 @@ class Battle
   end
 
   def start
+    print "\n"
     puts "#{@bot.name} sent out #{@bot.pokemon.name}!"
     puts "#{@player.name} sent out #{@player.pokemon.name}!"
     puts "-------------------Battle Start!-------------------"
@@ -54,10 +55,11 @@ class Battle
 
       first = select_first(@player_pokemon, @bot_pokemon)
       second = first == @player_pokemon ? @bot_pokemon : @player_pokemon
-      puts "--------------------"
+      print "\n"
+      puts "--------------------------------------------------"
       first.attack(second)
       second.attack(first) unless second.fainted?
-      puts "--------------------"
+      puts "--------------------------------------------------"
     end
   end
 end

@@ -9,7 +9,7 @@ module AuxiliaryMethods
     stat_individual_value
   end
 
-  # get_stats: determina los stats del jugador según formúlas de especificaciones
+  # get_stats: determina los stats del jugador segun formulas de especificaciones
   def get_stats(level, base_stat, stat_individual_value, stat_effort)
     stats = {}
 
@@ -32,7 +32,7 @@ module AuxiliaryMethods
     experience
   end
 
-  # base_damage:calcula daño base (antes de criticos y efectividad) segun tipo de movimiento y tipo del target
+  # base_damage:calcula danio base (antes de criticos y efectividad) segun tipo de movimiento y tipo del target
   def base_damage(level, stats, move, target)
     if (Pokedex::SPECIAL_MOVE_TYPE.find { |category| category == move[:type] }).nil?
       offensive_stat = stats[:attack]

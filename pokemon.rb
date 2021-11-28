@@ -28,25 +28,30 @@ class Pokemon
     @current_move = nil
   end
 
+  # resets pokemon health and current_moves for upcoming battle
   def prepare_for_battle
     @stats = get_stats(@level, @base_stat, @stat_individual_value, @stat_effort)
     @current_move = nil
   end
 
+  # lowers pokemon hp according to damage
   def receive_damage
     @stats[:hp] -= damage
   end
 
+  # stores the current move as a hash, related to the moves in Pokedex::MOVES
   def set_current_move(move)
     @current_move = move
   end
 
+  # verifies pokemon hp to check if fainted
   def fainted?
     !@stats[:hp].positive?
   end
 
+  # damages target if hits, and adds up critical and effectiveness damage if applied
   def attack(target)
-    puts "#{@name} used #{@current_move[:name]}"
+    puts "#{@name.capitalize} used #{@current_move[:name]}"
 
     hits = @current_move[:accuracy] >= rand(1..100)
     if hits
@@ -68,6 +73,7 @@ class Pokemon
     end
   end
 
+  # Increase stats, experience and level if the necessary experience is reached
   def increase_stats(target)
     gained_experience = (target.base_exp * target.level / 7).floor
     @experience_points += gained_experience
