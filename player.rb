@@ -15,7 +15,7 @@ class Player
 
   # select a move to pokemon player
   def select_move
-    move = get_with_options("Select a move to attack", @pokemon.moves).downcase
+    move = get_with_options("#{@name}, select your move", @pokemon.moves).downcase
     @pokemon.set_current_move(Pokedex::MOVES[move])
   end
 end

@@ -2,7 +2,7 @@ module GetInput
   def get_input(prompt, obligatory: true)
     input = ""
     while input.empty?
-      puts prompt
+      !prompt.empty? && (puts prompt)
       print "> "
       input = gets.chomp
       (!obligatory && input.empty?) && (return input)

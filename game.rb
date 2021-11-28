@@ -71,6 +71,7 @@ class Game
 
   # Get the pokemon's name
   def input_pokemon_name(name_master, name_pokemon)
+    print "\n"
     puts "You selected #{name_pokemon.upcase}. Great choice!"
     pokemon_name = get_input("Give your pokemon a name?", obligatory: false)
     pokemon_name.empty? && (pokemon_name = name_pokemon)
@@ -83,6 +84,7 @@ class Game
   def train
     bot_train = BotRandom.new
 
+    print "\n"
     puts "#{@player.name.capitalize} challenge Random Person for training"
     puts "Random Person has a #{bot_train.pokemon.species} level #{bot_train.pokemon.level}"
     puts ""
