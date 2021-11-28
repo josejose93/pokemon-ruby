@@ -56,16 +56,16 @@ class Battle
 
   def print_lives_players
     puts "#{@player.name.capitalize}'s #{@player_pokemon.name.capitalize} - Level #{@player_pokemon.level}"
-    (@player_pokemon.stats[:hp] < 0) ? (puts "HP: 0") : (puts "HP: #{@player_pokemon.stats[:hp]}")
+    @player_pokemon.stats[:hp].negative? ? (puts "HP: 0") : (puts "HP: #{@player_pokemon.stats[:hp]}")
     puts "#{@bot.name.capitalize}'s #{@bot_pokemon.name.capitalize} - Level #{@bot_pokemon.level}"
-    (@bot_pokemon.stats[:hp] < 0) ? (puts "HP: 0") : (puts "HP: #{@bot_pokemon.stats[:hp]}")
+    @bot_pokemon.stats[:hp].negative? ? (puts "HP: 0") : (puts "HP: #{@bot_pokemon.stats[:hp]}")
   end
 
   def battle_loop
     until @player_pokemon.fainted? || @bot_pokemon.fainted?
       @player.select_move
       @bot.select_move
-      
+
       first = select_first(@player_pokemon, @bot_pokemon)
       second = first == @player_pokemon ? @bot_pokemon : @player_pokemon
       print "\n"
